@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
@@ -8,9 +9,12 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/go-chi/chi/v5"
-	"github.com/go-chi/chi/v5/middleware"
+	"github.com/gin-gonic/gin"
 	"github.com/raulsilva-tech/SampleAPI/configs"
+	"github.com/raulsilva-tech/SampleAPI/internal/repository"
+	"github.com/raulsilva-tech/SampleAPI/internal/webserver/handlers"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func main() {
@@ -20,13 +24,33 @@ func main() {
 		panic(err)
 	}
 
-	r := chi.NewRouter()
+	db, err := sql.Open(cfg.DBDriver, fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", cfg.DBUser, cfg.DBUserPassword, cfg.DBHost, cfg.DBPort, cfg.DBDatabaseName))
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
 
-	r.Use(middleware.Logger)
-	r.Use(middleware.Recoverer)
+	r := gin.Default()
+	createRoutes(db, r)
 
 	log.Println("Web server running on ", cfg.WebServerPort)
 	log.Fatal(http.ListenAndServe(":"+fmt.Sprint(cfg.WebServerPort), r))
+}
+
+func createRoutes(db *sql.DB, r *gin.Engine) {
+
+	// uR := repository.NewUserRepository(db)
+	evR := repository.NewEventRepository(db)
+	etR := repository.NewEventTypeRepository(db)
+
+	etH := handlers.NewEventTypeHandler(etR, evR)
+	// evH:= handlers.NewEventHandler(evR)
+	// uH := handlers.NewUserRepository(uR,evR)
+
+	etGroup := r.Group("/event_types")
+	etGroup.POST("/", etH.Insert)
+	etGroup.DELETE("/", etH.Delete)
+
 }
 
 func getRootPath() string {

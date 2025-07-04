@@ -1,0 +1,30 @@
+POST http://localhost:8000/event_types HTTP/1.1
+Content-Type: application/json
+Authorization:{"userId":"1"}
+{
+    "code":"LIN",
+    "description":"Login"
+}
+
+###
+
+DELETE http://localhost:8000/event_types/IDDD HTTP/1.1
+Content-Type: application/json
+
+###
+PUT http://localhost:8000/event_types/IDDD HTTP/1.1
+Content-Type: application/json
+
+{
+    "code":"LIN",
+    "description":"Log-in"
+}
+###
+
+GET http://localhost:8000/event_types/IDDD HTTP/1.1
+Content-Type: application/json
+
+###
+
+GET http://localhost:8000/event_types HTTP/1.1
+Content-Type: application/json
