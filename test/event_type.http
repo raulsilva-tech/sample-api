@@ -1,6 +1,7 @@
 POST http://localhost:8000/event_types HTTP/1.1
 Content-Type: application/json
-Authorization:{"userId":"1"}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTU1Njk3NjQsInVzZXJJZCI6IjdiZDk3MDE0LWI0ZmItNDFjNS04ZjY4LTc3MmViN2FiYWVmMyJ9.eto8J4ZN7HHqNOE_3YT7_X9KKKaUUbsIDFTyv0-kIIw
+
 {
     "code":"LIN",
     "description":"Login"
@@ -23,8 +24,10 @@ Content-Type: application/json
 
 GET http://localhost:8000/event_types/IDDD HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTU1Njk3NjQsInVzZXJJZCI6IjdiZDk3MDE0LWI0ZmItNDFjNS04ZjY4LTc3MmViN2FiYWVmMyJ9.eto8J4ZN7HHqNOE_3YT7_X9KKKaUUbsIDFTyv0-kIIw
 
 ###
 
 GET http://localhost:8000/event_types HTTP/1.1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTU1Njk3NjQsInVzZXJJZCI6IjdiZDk3MDE0LWI0ZmItNDFjNS04ZjY4LTc3MmViN2FiYWVmMyJ9.eto8J4ZN7HHqNOE_3YT7_X9KKKaUUbsIDFTyv0-kIIw

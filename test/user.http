@@ -1,0 +1,19 @@
+POST http://localhost:8000/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email":"admin@sampleapi.com",
+    "password": "test"
+}
+
+###
+
+POST http://localhost:8000/users HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTU3NTE4NDgsInVzZXJJZCI6IjdiZDk3MDE0LWI0ZmItNDFjNS04ZjY4LTc3MmViN2FiYWVmMyJ9.ouXqW7b9eRNogHQlDbSlw2ifHIz6vXYVmkWzR_sc7nU
+
+{
+   "name":"Raul",
+   "email": "test@gmail.com",
+   "password": "test" 
+}

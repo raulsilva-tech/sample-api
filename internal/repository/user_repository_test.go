@@ -3,6 +3,7 @@ package repository
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"testing"
 	"time"
 
@@ -80,6 +81,20 @@ func (suite *UserRepositoryTestSuite) TestGetOne() {
 
 }
 
+func (suite *UserRepositoryTestSuite) TestLogin() {
+	ctx := context.Background()
+
+	u, err := entity.NewUser("Raul", "raulLogin@gmail.com", "test")
+	suite.NoError(err)
+	fmt.Println(u.Id.String())
+	r := NewUserRepository(suite.DB)
+	err = r.Insert(ctx, *u)
+	suite.NoError(err)
+	user, err := r.Login(ctx, *u)
+	suite.NoError(err)
+	suite.Equal(user.Name, u.Name)
+
+}
 func (suite *UserRepositoryTestSuite) TestDelete() {
 	ctx := context.Background()
 

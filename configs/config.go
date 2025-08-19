@@ -3,7 +3,6 @@ package configs
 import (
 	"os"
 
-	"github.com/go-chi/jwtauth"
 	"github.com/spf13/viper"
 )
 
@@ -16,8 +15,7 @@ type Config struct {
 	DBDatabaseName string `mapstructure:"DB_NAME"`
 	DBDriver       string `mapstructure:"DB_DRIVER"`
 	JWTSecret      string `mapstructure:"JWT_SECRET"`
-	JWTExpiresIn   int    `mapstructure:"JWT_EXPIRESIN"`
-	TokenAuth      *jwtauth.JWTAuth
+	JWTExpiresIn   int    `mapstructure:"JWT_EXPIRES_IN"`
 }
 
 func LoadConfig(path string) (*Config, error) {
@@ -51,8 +49,6 @@ JWT_EXPIRESIN=3000
 	if err != nil {
 		return nil, err
 	}
-
-	cfg.TokenAuth = jwtauth.New("HS256", []byte(cfg.JWTSecret), nil)
 
 	return &cfg, nil
 }

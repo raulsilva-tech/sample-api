@@ -11,4 +11,5 @@ var (
 	ErrDescriptionIsRequired = errors.New("description is required")
 	ErrEventTypeIsRequired   = errors.New("event type is required")
 	ErrUserIdIsRequired      = errors.New("user id is required")
+	ErrLoginFailed           = errors.New("user and/or password not found")
 )

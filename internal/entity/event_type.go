@@ -6,6 +6,14 @@ import (
 	"github.com/google/uuid"
 )
 
+const (
+	EventTypeLogin  = "LOGIN"
+	EventTypeLogout = "LOGOUT"
+	EventTypeInsert = "INSERT"
+	EventTypeUpdate = "UPDATE"
+	EventTypeDelete = "DELETE"
+)
+
 type EventType struct {
 	Id          uuid.UUID `json:"id"`
 	Code        string    `json:"code"`

@@ -35,7 +35,8 @@ func (suite *EventTypeRepositoryTestSuite) TestInsert() {
 	et, err := entity.NewEventType("1", "Login")
 	suite.NoError(err)
 
-	r := NewEventTypeRepository(suite.DB)
+	r, err := NewEventTypeRepository(context.Background(), suite.DB)
+	suite.NoError(err)
 	err = r.Insert(ctx, *et)
 	suite.NoError(err)
 
@@ -47,7 +48,8 @@ func (suite *EventTypeRepositoryTestSuite) TestUpdate() {
 	et, err := entity.NewEventType("1U", "Login")
 	suite.NoError(err)
 
-	r := NewEventTypeRepository(suite.DB)
+	r, err := NewEventTypeRepository(context.Background(), suite.DB)
+	suite.NoError(err)
 	err = r.Insert(ctx, *et)
 	suite.NoError(err)
 
@@ -69,7 +71,8 @@ func (suite *EventTypeRepositoryTestSuite) TestGetOne() {
 	et, err := entity.NewEventType("1G", "Login")
 	suite.NoError(err)
 
-	r := NewEventTypeRepository(suite.DB)
+	r, err := NewEventTypeRepository(context.Background(), suite.DB)
+	suite.NoError(err)
 	err = r.Insert(ctx, *et)
 	suite.NoError(err)
 	eventType, err := r.GetOne(ctx, et.Id.String())
@@ -85,7 +88,8 @@ func (suite *EventTypeRepositoryTestSuite) TestDelete() {
 	et, err := entity.NewEventType("1D", "Login")
 	suite.NoError(err)
 
-	r := NewEventTypeRepository(suite.DB)
+	r, err := NewEventTypeRepository(context.Background(), suite.DB)
+	suite.NoError(err)
 	err = r.Insert(ctx, *et)
 	suite.NoError(err)
 	err = r.Delete(ctx, et.Id.String())
@@ -99,7 +103,8 @@ func (suite *EventTypeRepositoryTestSuite) TestGetAll() {
 	et, err := entity.NewEventType("1ALL", "Login")
 	suite.NoError(err)
 
-	r := NewEventTypeRepository(suite.DB)
+	r, err := NewEventTypeRepository(context.Background(), suite.DB)
+	suite.NoError(err)
 	err = r.Insert(ctx, *et)
 	suite.NoError(err)
 

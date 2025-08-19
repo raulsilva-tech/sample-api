@@ -94,3 +94,25 @@ func (r *UserRepository) GetAll(ctx context.Context) ([]*entity.User, error) {
 	return userList, nil
 
 }
+
+func (u *UserRepository) Login(ctx context.Context, user entity.User) (*entity.User, error) {
+
+	dbu, err := u.Queries.Login(ctx, db.LoginParams{Email: user.Email, Password: user.Password})
+	if err != nil {
+		return nil, err
+	}
+
+	uuidId, err := uuid.Parse(dbu.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	return &entity.User{
+		Id:        uuidId,
+		Name:      dbu.Name,
+		Email:     dbu.Email,
+		Password:  dbu.Password,
+		CreatedAt: dbu.CreatedAt,
+		UpdatedAt: dbu.UpdatedAt.Time,
+	}, nil
+}

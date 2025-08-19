@@ -13,12 +13,18 @@ update users set name =?, email = ?, password = ?, updated_at = ? where id =?;
 -- name: DeleteUser :exec
 delete from users where id =?;
 
+-- name: Login :one
+select * from users where email = ? and password =?;
+
 
 -- name: ListEventTypes :many
 select * from event_types;
 
 -- name: GetEventType :one
 select * from event_types where id = ?;
+
+-- name: GetEventTypeByCode :one
+select * from event_types where code = ?;
 
 -- name: CreateEventType :exec
 insert into event_types (id,code,description,created_at,updated_at) values (?,?,?,?,?);

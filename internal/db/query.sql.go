@@ -140,6 +140,23 @@ func (q *Queries) GetEventType(ctx context.Context, id string) (EventType, error
 	return i, err
 }
 
+const getEventTypeByCode = `-- name: GetEventTypeByCode :one
+select id, code, description, created_at, updated_at from event_types where code = ?
+`
+
+func (q *Queries) GetEventTypeByCode(ctx context.Context, code string) (EventType, error) {
+	row := q.db.QueryRowContext(ctx, getEventTypeByCode, code)
+	var i EventType
+	err := row.Scan(
+		&i.ID,
+		&i.Code,
+		&i.Description,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return i, err
+}
+
 const getUser = `-- name: GetUser :one
 select id, name, email, password, created_at, updated_at from users where id = ?
 `
@@ -255,6 +272,29 @@ func (q *Queries) ListUsers(ctx context.Context) ([]User, error) {
 		return nil, err
 	}
 	return items, nil
+}
+
+const login = `-- name: Login :one
+select id, name, email, password, created_at, updated_at from users where email = ? and password =?
+`
+
+type LoginParams struct {
+	Email    string
+	Password string
+}
+
+func (q *Queries) Login(ctx context.Context, arg LoginParams) (User, error) {
+	row := q.db.QueryRowContext(ctx, login, arg.Email, arg.Password)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Name,
+		&i.Email,
+		&i.Password,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+	)
+	return i, err
 }
 
 const updateEvent = `-- name: UpdateEvent :exec

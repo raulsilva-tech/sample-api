@@ -12,7 +12,7 @@ func TestNewEvent(t *testing.T) {
 
 	userId := uuid.NewString()
 	evTypeId := uuid.NewString()
-	ev, err := NewEvent(evTypeId, userId)
+	ev, err := NewEvent(evTypeId, userId,"","")
 
 	assert.Nil(t, err)
 	assert.NotNil(t, ev)
@@ -27,7 +27,7 @@ func TestNewEvent(t *testing.T) {
 func TestNewEvent_WhenEventTypeIsInvalid(t *testing.T) {
 
 	
-	_, err := NewEvent("dsd", uuid.NewString())
+	_, err := NewEvent("dsd", uuid.NewString(),"","")
 
 	assert.NotNil(t, err)
 	assert.Equal(t, err, errors.New("event_type_id: invalid uuid string"))
@@ -35,7 +35,7 @@ func TestNewEvent_WhenEventTypeIsInvalid(t *testing.T) {
 
 func TestNewEvent_WhenUserIsInvalid(t *testing.T) {
 
-	_, err := NewEvent(uuid.NewString(), "")
+	_, err := NewEvent(uuid.NewString(), "","","")
 
 	assert.NotNil(t, err)
 	assert.Equal(t, err, errors.New("user_id: invalid uuid string"))
