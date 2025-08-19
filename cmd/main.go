@@ -9,10 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/gin-gonic/gin"
-	"github.com/go-chi/chi/middleware"
-	"github.com/go-chi/chi/v5/middleware"
 	"github.com/raulsilva-tech/SampleAPI/configs"
 	"github.com/raulsilva-tech/SampleAPI/internal/repository"
 	"github.com/raulsilva-tech/SampleAPI/internal/webserver/handlers"
@@ -34,7 +31,6 @@ func main() {
 	defer db.Close()
 
 	r := gin.Default()
-
 
 	createRoutes(db, r, cfg)
 
