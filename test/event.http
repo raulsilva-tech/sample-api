@@ -1,0 +1,13 @@
+POST http://localhost:8000/events HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTY1MjMxNTMsInVzZXJJZCI6IjdiZDk3MDE0LWI0ZmItNDFjNS04ZjY4LTc3MmViN2FiYWVmMyJ9.sNwU2Td10qqsI5vkKp49Vn6ZdhB1I9Ma-pMkqoUADNQ
+
+{
+    "user_id":"b579f7db-33c8-46b3-916e-26dfc266cb3d",
+    "event_type_id":"7aa507dc-6361-4a28-bd21-18b3879a0811",
+    "target_table": "",
+    "target_id": "",
+    "created_at":"2025-07-12T14:29:15Z"
+}
+
+###

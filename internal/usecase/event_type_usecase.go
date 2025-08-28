@@ -47,7 +47,7 @@ func (uc *EventTypeUseCase) RegisterEventType(ctx context.Context, input EventTy
 	}
 
 	//inserting event to register event type creation
-	event, err := entity.NewEvent(uc.EventTypeRepository.EventTypeMap[entity.EventTypeInsert], input.UserId, entity.TableEventType, evType.Id.String())
+	event, err := entity.NewEvent(uc.EventTypeRepository.EventTypeMap[entity.EventTypeInsert], input.UserId, entity.TableEventType, evType.Id.String(), time.Now())
 	if err == nil {
 		err = uc.EventRepository.Insert(ctx, *event)
 		if err != nil {
@@ -77,7 +77,7 @@ func (uc *EventTypeUseCase) UpdateEventType(ctx context.Context, input EventType
 	}
 
 	//inserting event to register event type update
-	event, err := entity.NewEvent(uc.EventTypeRepository.EventTypeMap[entity.EventTypeUpdate], input.UserId, entity.TableEventType, evType.Id.String())
+	event, err := entity.NewEvent(uc.EventTypeRepository.EventTypeMap[entity.EventTypeUpdate], input.UserId, entity.TableEventType, evType.Id.String(),time.Now())
 	if err == nil {
 		err = uc.EventRepository.Insert(ctx, *event)
 		if err != nil {
@@ -97,7 +97,7 @@ func (uc *EventTypeUseCase) RemoveEventType(ctx context.Context, id string, user
 	}
 
 	//inserting event to register event type update
-	event, err := entity.NewEvent(uc.EventTypeRepository.EventTypeMap[entity.EventTypeDelete], userId, entity.TableEventType, id)
+	event, err := entity.NewEvent(uc.EventTypeRepository.EventTypeMap[entity.EventTypeDelete], userId, entity.TableEventType, id,time.Now())
 	if err == nil {
 		err = uc.EventRepository.Insert(ctx, *event)
 		if err != nil {

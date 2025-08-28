@@ -3,17 +3,43 @@ Content-Type: application/json
 
 {
     "email":"admin@sampleapi.com",
-    "password": "test"
+    "password": "test3"
 }
 
 ###
 
 POST http://localhost:8000/users HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTU3NTE4NDgsInVzZXJJZCI6IjdiZDk3MDE0LWI0ZmItNDFjNS04ZjY4LTc3MmViN2FiYWVmMyJ9.ouXqW7b9eRNogHQlDbSlw2ifHIz6vXYVmkWzR_sc7nU
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTY0MzE0ODMsInVzZXJJZCI6IjdiZDk3MDE0LWI0ZmItNDFjNS04ZjY4LTc3MmViN2FiYWVmMyJ9.M6FFDIf5M350vNB0Q_Vni3FONP6oGhYn2HceNSlTbAc
 {
    "name":"Raul",
-   "email": "test@gmail.com",
+   "email": "test2@gmail.com",
    "password": "test" 
 }
+
+###
+DELETE http://localhost:8000/users/503b2223-a04c-4b29-ad02-b46cf82fk5c7b HTTP/1.1
+Content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTY0MzE0ODMsInVzZXJJZCI6IjdiZDk3MDE0LWI0ZmItNDFjNS04ZjY4LTc3MmViN2FiYWVmMyJ9.M6FFDIf5M350vNB0Q_Vni3FONP6oGhYn2HceNSlTbAc
+
+###
+PUT http://localhost:8000/users/b579f7db-33c8-46b3-916e-26dfc266cb3d HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTY0MzE0ODMsInVzZXJJZCI6IjdiZDk3MDE0LWI0ZmItNDFjNS04ZjY4LTc3MmViN2FiYWVmMyJ9.M6FFDIf5M350vNB0Q_Vni3FONP6oGhYn2HceNSlTbAc
+
+{
+   "name":"admin",
+   "email": "admin@sampleapi.com",
+   "password": "test3" 
+}
+
+###
+GET http://localhost:8000/users/7bd97014-b4fb-41c5-8f68-772eb7abaef3 HTTP/1.1
+Content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTY1MjMxNTMsInVzZXJJZCI6IjdiZDk3MDE0LWI0ZmItNDFjNS04ZjY4LTc3MmViN2FiYWVmMyJ9.sNwU2Td10qqsI5vkKp49Vn6ZdhB1I9Ma-pMkqoUADNQ
+
+###
+
+GET http://localhost:8000/users/ HTTP/1.1
+Content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTY1MjMxNTMsInVzZXJJZCI6IjdiZDk3MDE0LWI0ZmItNDFjNS04ZjY4LTc3MmViN2FiYWVmMyJ9.sNwU2Td10qqsI5vkKp49Vn6ZdhB1I9Ma-pMkqoUADNQ

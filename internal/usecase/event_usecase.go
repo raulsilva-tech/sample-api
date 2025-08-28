@@ -1,20 +1,54 @@
 package usecase
 
-import "github.com/raulsilva-tech/SampleAPI/internal/repository"
+import (
+	"context"
+	"time"
 
-type EventUserCase struct {
-	UserRepository  *repository.UserRepository
+	"github.com/raulsilva-tech/SampleAPI/internal/entity"
+	"github.com/raulsilva-tech/SampleAPI/internal/repository"
+)
+
+type EventUseCase struct {
 	EventRepository *repository.EventRepository
 }
 
-func NewEventUseCase(ur *repository.UserRepository, er *repository.EventRepository) *EventUserCase {
-	return &EventUserCase{
-		UserRepository:  ur,
+func NewEventUseCase(er *repository.EventRepository) *EventUseCase {
+	return &EventUseCase{
 		EventRepository: er,
 	}
 }
 
-func (uc *EventUserCase) RegisterEvent() error {
+type EventUseCaseInput struct {
+	EventTypeId string
+	UserId      string
+	TargetTable string
+	TargetId    string
+}
 
-	return nil
+type EventUseCaseOutput struct {
+	Id          string
+	EventTypeId string
+	UserId      string
+	TargetTable string
+	TargetId    string
+}
+
+func (uc *EventUseCase) RegisterEvent(ctx context.Context, input EventUseCaseInput) (EventUseCaseOutput, error) {
+
+	ev, err := entity.NewEvent(input.EventTypeId, input.UserId, input.TargetTable, input.TargetId, time.Now())
+	if err != nil {
+		return EventUseCaseOutput{}, err
+	}
+	err = uc.EventRepository.Insert(ctx, *ev)
+	if err != nil {
+		return EventUseCaseOutput{}, err
+	}
+
+	return EventUseCaseOutput{
+		Id:          ev.Id.String(),
+		EventTypeId: ev.EvType.Id.String(),
+		UserId:      ev.EvUser.Id.String(),
+		TargetTable: ev.TargetTable,
+		TargetId:    ev.TargetId,
+	}, nil
 }

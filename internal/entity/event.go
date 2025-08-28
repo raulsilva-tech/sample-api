@@ -16,7 +16,7 @@ type Event struct {
 	TargetId    string
 }
 
-func NewEvent(eventTypeId, userId, targetTable, targetId string) (*Event, error) {
+func NewEvent(eventTypeId, userId, targetTable, targetId string, createdAt time.Time) (*Event, error) {
 
 	uuidEvTypeId, err := uuid.Parse(eventTypeId)
 	if err != nil {
@@ -27,9 +27,13 @@ func NewEvent(eventTypeId, userId, targetTable, targetId string) (*Event, error)
 		return nil, errors.New("user_id: invalid uuid string > " + userId)
 	}
 
+	if createdAt.IsZero() {
+		createdAt = time.Now()
+	}
+
 	e := &Event{
 		Id:          uuid.New(),
-		CreatedAt:   time.Now(),
+		CreatedAt:   createdAt,
 		EvType:      EventType{Id: uuidEvTypeId},
 		EvUser:      User{Id: uuidUserId},
 		TargetTable: targetTable,

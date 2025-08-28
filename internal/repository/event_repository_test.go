@@ -35,7 +35,7 @@ func (suite *EventRepositoryTestSuite) TestInsert() {
 
 	userIdStr := uuid.NewString()
 	etIdStr := uuid.NewString()
-	ev, err := entity.NewEvent( etIdStr, userIdStr,"","")
+	ev, err := entity.NewEvent(etIdStr, userIdStr, "", "", time.Now())
 	suite.NoError(err)
 
 	r := NewEventRepository(suite.DB)
@@ -49,7 +49,7 @@ func (suite *EventRepositoryTestSuite) TestUpdate() {
 
 	userIdStr := uuid.NewString()
 	etIdStr := uuid.NewString()
-	ev, err := entity.NewEvent( etIdStr, userIdStr,"","")
+	ev, err := entity.NewEvent(etIdStr, userIdStr, "", "", time.Now())
 	suite.NoError(err)
 
 	r := NewEventRepository(suite.DB)
@@ -73,7 +73,7 @@ func (suite *EventRepositoryTestSuite) TestGetOne() {
 
 	userIdStr := uuid.NewString()
 	etIdStr := uuid.NewString()
-	ev, err := entity.NewEvent( etIdStr, userIdStr,"","")
+	ev, err := entity.NewEvent(etIdStr, userIdStr, "", "", time.Now())
 	suite.NoError(err)
 
 	r := NewEventRepository(suite.DB)
@@ -91,7 +91,7 @@ func (suite *EventRepositoryTestSuite) TestDelete() {
 
 	userIdStr := uuid.NewString()
 	etIdStr := uuid.NewString()
-ev, err := entity.NewEvent( etIdStr, userIdStr,"","")
+	ev, err := entity.NewEvent(etIdStr, userIdStr, "", "", time.Now())
 	suite.NoError(err)
 
 	r := NewEventRepository(suite.DB)
@@ -108,7 +108,7 @@ func (suite *EventRepositoryTestSuite) TestGetAll() {
 
 	userIdStr := uuid.NewString()
 	etIdStr := uuid.NewString()
-	ev, err := entity.NewEvent( etIdStr, userIdStr,"","")
+	ev, err := entity.NewEvent(etIdStr, userIdStr, "", "", time.Now())
 	suite.NoError(err)
 
 	r := NewEventRepository(suite.DB)
