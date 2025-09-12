@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/raulsilva-tech/SampleAPI/internal/entity"
+	"github.com/raulsilva-tech/sample-api/internal/entity"
 	"github.com/stretchr/testify/suite"
 )
 

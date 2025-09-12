@@ -10,9 +10,9 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/raulsilva-tech/SampleAPI/configs"
-	"github.com/raulsilva-tech/SampleAPI/internal/repository"
-	"github.com/raulsilva-tech/SampleAPI/internal/webserver/handlers"
+	"github.com/raulsilva-tech/sample-api/configs"
+	"github.com/raulsilva-tech/sample-api/internal/repository"
+	"github.com/raulsilva-tech/sample-api/internal/webserver/handlers"
 
 	_ "github.com/go-sql-driver/mysql"
 )

@@ -5,8 +5,8 @@ import (
 	"database/sql"
 
 	"github.com/google/uuid"
-	"github.com/raulsilva-tech/SampleAPI/internal/db"
-	"github.com/raulsilva-tech/SampleAPI/internal/entity"
+	"github.com/raulsilva-tech/sample-api/internal/db"
+	"github.com/raulsilva-tech/sample-api/internal/entity"
 )
 
 type EventTypeRepository struct {

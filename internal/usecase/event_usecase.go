@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/raulsilva-tech/SampleAPI/internal/entity"
-	"github.com/raulsilva-tech/SampleAPI/internal/repository"
+	"github.com/raulsilva-tech/sample-api/internal/entity"
+	"github.com/raulsilva-tech/sample-api/internal/repository"
 )
 
 type EventUseCase struct {

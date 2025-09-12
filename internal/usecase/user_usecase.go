@@ -8,8 +8,8 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
-	"github.com/raulsilva-tech/SampleAPI/internal/entity"
-	"github.com/raulsilva-tech/SampleAPI/internal/repository"
+	"github.com/raulsilva-tech/sample-api/internal/entity"
+	"github.com/raulsilva-tech/sample-api/internal/repository"
 	"golang.org/x/crypto/bcrypt"
 )
 

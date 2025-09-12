@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/raulsilva-tech/SampleAPI/internal/dto"
-	"github.com/raulsilva-tech/SampleAPI/internal/entity"
-	"github.com/raulsilva-tech/SampleAPI/internal/repository"
-	"github.com/raulsilva-tech/SampleAPI/internal/usecase"
+	"github.com/raulsilva-tech/sample-api/internal/dto"
+	"github.com/raulsilva-tech/sample-api/internal/entity"
+	"github.com/raulsilva-tech/sample-api/internal/repository"
+	"github.com/raulsilva-tech/sample-api/internal/usecase"
 )
 
 type UserHandler struct {
