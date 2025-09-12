@@ -1,4 +1,4 @@
-module github.com/raulsilva-tech/SampleAPI
+module github.com/raulsilva-tech/sample-api
 
 go 1.24.3
 
