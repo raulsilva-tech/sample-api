@@ -1,8 +1,11 @@
 package handlers
 
 import (
+	"context"
 	"database/sql"
+	"errors"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/raulsilva-tech/SampleAPI/internal/dto"
@@ -31,6 +34,9 @@ func NewUserHandler(ur *repository.UserRepository, er *repository.EventRepositor
 
 func (h *UserHandler) Login(c *gin.Context) {
 
+	ctx, cancel := context.WithTimeout(c.Request.Context(), time.Millisecond*100)
+	defer cancel()
+
 	var input dto.LoginInput
 	err := c.BindJSON(&input)
 	if err != nil {
@@ -39,12 +45,14 @@ func (h *UserHandler) Login(c *gin.Context) {
 	}
 
 	uc := usecase.NewUserUseCase(h.UserRepository, h.EventRepository, h.EventTypeRepository)
-	output, err := uc.Login(c.Request.Context(), usecase.LoginUseCaseInput{Email: input.Email, Password: input.Password, JWTSecret: h.JWTSecret, JWTExpiresIn: h.JWTExpiresIn})
+	output, err := uc.Login(ctx, usecase.LoginUseCaseInput{Email: input.Email, Password: input.Password, JWTSecret: h.JWTSecret, JWTExpiresIn: h.JWTExpiresIn})
 	if err != nil {
 		if err == entity.ErrLoginFailed {
 			c.JSON(http.StatusOK, gin.H{"error": err.Error()})
 		} else if err == sql.ErrNoRows {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		} else if errors.Is(err, context.DeadlineExceeded) {
+			c.JSON(http.StatusGatewayTimeout, gin.H{"error": err.Error()})
 		} else {
 
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
