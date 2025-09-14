@@ -34,7 +34,7 @@ func NewUserHandler(ur *repository.UserRepository, er *repository.EventRepositor
 
 func (h *UserHandler) Login(c *gin.Context) {
 
-	ctx, cancel := context.WithTimeout(c.Request.Context(), time.Millisecond*100)
+	ctx, cancel := context.WithTimeout(c.Request.Context(), 3*time.Second)
 	defer cancel()
 
 	var input dto.LoginInput
@@ -47,20 +47,20 @@ func (h *UserHandler) Login(c *gin.Context) {
 	uc := usecase.NewUserUseCase(h.UserRepository, h.EventRepository, h.EventTypeRepository)
 	output, err := uc.Login(ctx, usecase.LoginUseCaseInput{Email: input.Email, Password: input.Password, JWTSecret: h.JWTSecret, JWTExpiresIn: h.JWTExpiresIn})
 	if err != nil {
-		if err == entity.ErrLoginFailed {
-			c.JSON(http.StatusOK, gin.H{"error": err.Error()})
-		} else if err == sql.ErrNoRows {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		} else if errors.Is(err, context.DeadlineExceeded) {
-			c.JSON(http.StatusGatewayTimeout, gin.H{"error": err.Error()})
-		} else {
-
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		switch {
+		case errors.Is(err, entity.ErrLoginFailed):
+			c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		case errors.Is(err, sql.ErrNoRows):
+			c.JSON(http.StatusNotFound, gin.H{"error": "user not found"})
+		case errors.Is(err, context.DeadlineExceeded):
+			c.JSON(http.StatusGatewayTimeout, gin.H{"error": "request timeout"})
+		default:
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "internal server error"})
 		}
 		return
 	}
 
-	c.JSON(http.StatusOK, output.Token)
+	c.JSON(http.StatusOK, gin.H{"token": output.Token})
 
 }
 
